@@ -21,6 +21,14 @@ spec:
       serviceAccountName: {{ include "buzzword-counter.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: {{ include "buzzword-counter.fullname" . }}-migrate
+          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["python", "manage.py", "migrate"]
+          envFrom:
+            - configMapRef:
+                name: globalenv-configmap
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
