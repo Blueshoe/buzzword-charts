@@ -71,16 +71,12 @@ global:
   postgresql:
     postgresqlDatabase: buzzwords
     postgresqlUsername: buzz
-    postgresqlPassword: aldrin
+    existingSecret: buzzword-counter-postgresql-custom
 
 environmentVariables:
   DJANGO_DEBUG: False
-  DJANGO_SECRET_KEY: lc800)_$ely9p=4r^z%sd90eom58xlat#rma0gy5uc+=%vrc-2
   DATABASE_NAME: buzzwords
   DATABASE_USER: buzz
-  DATABASE_PASSWORD: aldrin
-  DATABASE_HOST: buzzword-counter-postgresql
-  CELERY_BROKER_URL: amqp://buzz:aldrin@buzzword-counter-rabbitmq:5672/
   CELERY_LOG_LEVEL: info
   CELERY_UID: 1337
   CELERY_GID: 1337

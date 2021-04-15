@@ -1,0 +1,4 @@
+---
+creation_rules:
+  # buzzword-counter@blueshoe.de PGP Key
+  - pgp: '24A8 F30F 1CE5 BE48 26D9  385F 65EE E1FF 0ABD FD2A'
