@@ -8,7 +8,8 @@ image:
   repository: registry.local:5000/buzzword-counter
   pullPolicy: Always
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: quay-registry-buzzword-counter
 nameOverride: ""
 fullnameOverride: ""
 

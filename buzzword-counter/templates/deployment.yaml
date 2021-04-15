@@ -53,6 +53,7 @@ spec:
             - configMapRef:
                 name: globalenv-configmap
           env:
+            {{- include "buzzword-counter.envVariables" . | nindent 12 }}
             - name: DJANGO_RUN_ENV
               value: web
       {{- with .Values.nodeSelector }}
@@ -124,6 +125,7 @@ spec:
             - configMapRef:
                 name: globalenv-configmap
           env:
+            {{- include "buzzword-counter.envVariables" . | nindent 12 }}
             - name: DJANGO_RUN_ENV
               value: worker
       {{- with .Values.nodeSelector }}
