@@ -34,7 +34,7 @@ spec:
         {{- range .paths }}
           - path: {{ . }}
             backend:
-              serviceName: {{ $fullName }}
+              serviceName: buzzword-counter
               servicePort: {{ $svcPort }}
         {{- end }}
   {{- end }}
