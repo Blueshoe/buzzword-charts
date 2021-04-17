@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: registry.local:5000/buzzword-counter
+  repository: quay.io/blueshoe/buzzword-counter
   pullPolicy: Always
 
 imagePullSecrets:
