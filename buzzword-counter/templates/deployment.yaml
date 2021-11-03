@@ -29,6 +29,10 @@ spec:
           envFrom:
             - configMapRef:
                 name: globalenv-configmap
+          env:
+            {{- include "buzzword-counter.envVariables" . | nindent 12 }}
+            - name: DJANGO_RUN_ENV
+              value: web
       containers:
         - name: {{ .Chart.Name }}
           securityContext:

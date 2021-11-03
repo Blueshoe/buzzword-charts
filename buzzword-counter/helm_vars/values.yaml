@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: registry.local:5000/buzzword-counter
+  repository: quay.io/blueshoe/buzzword-counter
   pullPolicy: Always
 
 imagePullSecrets:
@@ -38,13 +38,14 @@ service:
   port: 80
 
 ingress:
-  enabled: false
+  enabled: true
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: 127.0.0.1
-      paths: []
+    - host: buzz.127.0.0.1.nip.io
+      paths: 
+        - "/"
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
