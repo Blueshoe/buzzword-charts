@@ -5,7 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: registry.local:5000/buzzword-counter
+  repository: harbor.maurer-login.eu/workshop-demo/buzzword-counter
+  tag: latest
   pullPolicy: Always
 
 imagePullSecrets: []
@@ -69,6 +70,7 @@ affinity: {}
 
 global:
   postgresql:
+    enabled: true
     postgresqlDatabase: buzzwords
     postgresqlUsername: buzz
     postgresqlPassword: aldrin
