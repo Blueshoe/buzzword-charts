@@ -22,9 +22,8 @@ appVersion: 0.2.0
 
 dependencies:
 - name: postgresql
-  version: 8.9.x  # corresponds to postgresql 11.7.0
-  repository: https://charts.bitnami.com/bitnami
-  condition: global.postgresql.enabled
+  version: 10.2.x  # 10.2.0 corresponds to postgresql 11.10.0
+  repository: https://charts.bitnami.com/bitnami/
 - name: rabbitmq
   version: 6.25.x  # corresponds to rabbitmq 3.8.3
   repository: https://charts.bitnami.com/bitnami
