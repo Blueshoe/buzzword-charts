@@ -116,21 +116,15 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
-          livenessProbe:
-            exec:
-              # bash is needed to replace the environment variable
-              command: [
-                "bash",
-                "-c",
-                "celery inspect ping -A dll.configuration.celery.app -d celery@$HOSTNAME"
-              ]
-            initialDelaySeconds: 30  # startup takes some time
-            periodSeconds: 60  # default is quite often and celery uses a lot cpu/ram then.
-            timeoutSeconds: 10  # default is too low
-#          readinessProbe:
-#            httpGet:
-#              path: /
-#              port: http
+          command: ["/bin/sh","-c"]
+          args: ["celery worker
+                  -l $CELERY_LOG_LEVEL
+                  -A buzzword_counter.configuration.celery.app
+                  --workdir /code/
+                  --uid $CELERY_UID
+                  --gid $CELERY_GID
+                  -O fair
+                 "]
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           envFrom:
