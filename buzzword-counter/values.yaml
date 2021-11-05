@@ -93,5 +93,11 @@ rabbitmq:
     password: aldrin
 
 postgresql:
+  securityContext:
+    enabled: true
+    fsGroup: 1001
+    runAsUser: 1001
   volumePermissions:
     enabled: true
+    securityContext:
+      runAsUser: 1001
