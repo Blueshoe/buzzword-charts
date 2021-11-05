@@ -33,9 +33,12 @@ spec:
         paths:
         {{- range .paths }}
           - path: {{ .path }}
+            pathType: ImplementationSpecific
             backend:
-              serviceName: buzzword-counter
-              servicePort: {{ $svcPort }}
+              service:
+                name: buzzword-counter
+                port:
+                  number: {{ $svcPort }}
         {{- end }}
   {{- end }}
 {{- end }}
