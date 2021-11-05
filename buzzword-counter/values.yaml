@@ -86,6 +86,12 @@ environmentVariables:
   CELERY_GID: 1337
 
 rabbitmq:
+  volumePermissions:
+    enabled: true
   rabbitmq:
     username: buzz
     password: aldrin
+
+postgresql:
+    volumePermissions:
+        enabled: true
