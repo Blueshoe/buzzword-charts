@@ -36,8 +36,8 @@ service:
   type: ClusterIP
   port: 80
 
-enabled: true
-  annotations: {}
+ingress:
+  enabled: true
   hosts:
     - host: buzzword-counter.127.0.0.1.nip.io
       paths:
