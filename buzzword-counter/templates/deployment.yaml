@@ -21,14 +21,6 @@ spec:
       serviceAccountName: {{ include "buzzword-counter.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      initContainers:
-        - name: {{ include "buzzword-counter.fullname" . }}-migrate
-          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["python", "manage.py", "migrate"]
-          envFrom:
-            - configMapRef:
-                name: globalenv-configmap
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -37,7 +29,9 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/bin/sh","-c"]
           args: ["python manage.py serve
+                  --command 'migrate'
                   --command 'collectstatic --no-input'
+                  --check-migrations
                   --port {{ .Values.service.port }}
                   --probe-port 9001
                   --static
