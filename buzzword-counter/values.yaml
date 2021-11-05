@@ -93,5 +93,5 @@ rabbitmq:
     password: aldrin
 
 postgresql:
-    volumePermissions:
-        enabled: true
+  volumePermissions:
+    enabled: true
