@@ -1,0 +1,67 @@
+version: "1"
+
+# the cluster configuration across all decks
+cluster:
+  provider: k3d
+  minVersion: 4.0.0
+  name: another-cluster
+  nativeConfig: # content of the native config file (e.g. https://k3d.io/v5.0.0/usage/configfile/)
+    apiVersion: k3d.io/v1alpha2
+    kind: Simple
+    servers: 1 # same as `--servers 1`
+    agents: 1 # same as `--agents 2`
+    image: rancher/k3s:v1.20.4-k3s1 # same as `--image rancher/k3s:v1.20.4-k3s1`
+    ports:
+      - port: 8080:80
+        nodeFilters:
+          - loadbalancer
+      - port: 31820:31820/UDP
+        nodeFilters:
+          - agent[0]
+
+decks:
+  - name: buzzword-counter
+    namespace: buzzword
+    sources:
+      - type: helm
+        ref: https://kubernetes.github.io/dashboard/
+        chart: kubernetes-dashboard
+        releaseName: dashboard
+        parameters:
+          - name: ingress.enabled
+            value: true
+          - name: ingress.hosts
+            value: '{dashboard.127.0.0.1.nip.io}'
+          - name: protocolHttp
+            value: true
+          - name: service.externalPort
+            value: 8080
+          - name: serviceAccount.create
+            value: true
+          - name: rbac.clusterReadOnlyRole
+            value: true
+
+      - type: helm
+        ref: https://charts.bitnami.com/bitnami
+        chart: solr
+        releaseName: solr
+        parameters:
+          - name: ingress.enabled
+            value: true
+          - name: ingress.hostname
+            value: solr.127.0.0.1.nip.io
+
+      - type: helm
+        ref: git@github.com:Blueshoe/buzzword-charts.git
+        targetRevision: HEAD # only relevant for git
+        releaseName: buzzword-counter # Release name override (defaults to application name)
+        path: buzzword-counter
+#        valueFiles: # Helm values (files) relative to 'path'
+#          - helm_vars/development/values.development.yaml
+
+#      - type: kustomize
+#      - type: directory
+#        ref: git@github.com:Blueshoe/buzzword-charts.git
+#        targetRevision: HEAD
+#        path: .
+#        recursive: true
