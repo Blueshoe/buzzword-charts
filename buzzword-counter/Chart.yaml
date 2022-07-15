@@ -22,8 +22,8 @@ appVersion: latest
 
 dependencies:
 - name: postgresql
-  version: 10.16.2
+  version: 11.6.16
   repository: https://charts.bitnami.com/bitnami/
 - name: rabbitmq
-  version: 8.24.13 
+  version: 10.1.14
   repository: https://charts.bitnami.com/bitnami

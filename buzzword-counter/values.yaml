@@ -68,9 +68,10 @@ affinity: {}
 
 global:
   postgresql:
-    postgresqlDatabase: buzzwords
-    postgresqlUsername: buzz
-    postgresqlPassword: aldrin
+    auth:
+      username: buzz
+      password: aldrin
+      database: buzzwords
 
 environmentVariables:
   DJANGO_DEBUG: False
@@ -87,7 +88,7 @@ environmentVariables:
 rabbitmq:
   volumePermissions:
     enabled: true
-  rabbitmq:
+  auth:
     username: buzz
     password: aldrin
 
